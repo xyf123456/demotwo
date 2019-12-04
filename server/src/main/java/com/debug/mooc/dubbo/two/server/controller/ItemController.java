@@ -45,4 +45,27 @@ public class ItemController {
         }
         return resMap;
     }
+
+
+    @RequestMapping(value = prefix + "/list/page", method = RequestMethod.GET)
+    private Map<String, Object> listPage(Integer pageNo, Integer pageSize) {
+        if (pageNo == null || pageSize == null || pageNo <= 0 || pageSize <= 0) {
+            pageNo = 1;
+            pageSize = 2;
+        }
+        Map<String, Object> resMap = Maps.newHashMap();
+        resMap.put("code", "0");
+        resMap.put("msg", "成功！");
+        try {
+            BaseResponse baseResponse = dubboItemService.listPageItems(pageNo, pageSize);
+            if (baseResponse != null && baseResponse.getCode().equals(0)) {
+                resMap.put("data", baseResponse.getData());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resMap.put("code", "-1");
+            resMap.put("msg", "失败！");
+        }
+        return resMap;
+    }
 }
