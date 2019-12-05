@@ -2,9 +2,11 @@ package com.debug.mooc.dubbo.two.server.controller;
 
 import com.debug.mooc.dubbo.one.api.response.BaseResponse;
 import com.debug.mooc.dubbo.two.server.request.PushOrderRequest;
+import com.debug.mooc.dubbo.two.server.service.OrderRecordService;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,9 @@ public class OrderRecordController {
     private static final Logger log = LoggerFactory.getLogger(OrderRecordController.class);
 
     private static final String prefix = "order";
+
+    @Autowired
+    private OrderRecordService orderRecordService;
 
 
     /**
