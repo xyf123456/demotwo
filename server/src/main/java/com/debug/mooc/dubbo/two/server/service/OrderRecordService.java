@@ -1,6 +1,7 @@
 package com.debug.mooc.dubbo.two.server.service;
 
 import com.debug.mooc.dubbo.two.server.controller.OrderRecordController;
+import com.debug.mooc.dubbo.two.server.data.DubboRecordResponse;
 import com.debug.mooc.dubbo.two.server.request.PushOrderRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
@@ -66,6 +67,7 @@ public class OrderRecordService {
      * description: 使用封装好的请求完成用户下单服务的调用
      * create time: 2019/12/6 23:11
      * [pushOrderRequest]
+     *
      * @return void
      */
     public void pushOrder1(PushOrderRequest pushOrderRequest) throws Exception {
@@ -74,6 +76,18 @@ public class OrderRecordService {
             headerMap.put("Content-Type", "application/json");
             String res = httpService.post(URL, headerMap, "application/json", objectMapper.writeValueAsString(pushOrderRequest));
             log.info("响应结果:{}", res);
+            //todo 得到响应数据需要解析后进行保存或者其他操作
+//         todo   map解析 解析针对响应数据比较少的场景
+            Map<String, Object> resMap = objectMapper.readValue(res, Map.class);
+            log.info("得到响应解析结果:{}", resMap);
+            Integer code = (Integer) resMap.get("code");
+            String msg = (String) resMap.get("msg");
+            Integer data = (Integer) resMap.get("data");
+            log.info("code={} msg={} data={}", code, msg, data);
+
+            //todo 对象解析，更加通用,数据量比较复杂的解析
+            DubboRecordResponse dubboRecordResponse = objectMapper.readValue(res, DubboRecordResponse.class);
+            log.info("得到的响应数据：{}", dubboRecordResponse);
         } catch (IOException e) {
             e.printStackTrace();
         }
