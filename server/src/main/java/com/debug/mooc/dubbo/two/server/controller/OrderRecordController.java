@@ -49,6 +49,9 @@ public class OrderRecordController {
         try {
             log.info("接受到请求数据:{}", pushOrderRequest);
             //todo 处理用户下单数据-发起用户下单接口的调用
+//            orderRecordService.pushOrder(pushOrderRequest);
+//            使用优化后的方法
+            orderRecordService.pushOrder1(pushOrderRequest);
         } catch (Exception e) {
             log.error("面向客户:用户下单-发生异常：", e.fillInStackTrace());
             resMap.put("code", "-1");
