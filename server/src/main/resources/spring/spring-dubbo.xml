@@ -23,6 +23,6 @@
 
     <!--    引入服务提供方提供的dubbo服务-->
     <dubbo:reference interface="com.debug.mooc.dubbo.one.api.service.IDubboItemService" id="dubboItemService"
-                     protocol="dubbo" version="1.0" timeout="20000">
+                     url="dubbo://127.0.0.1:20903" protocol="dubbo" version="1.0" timeout="20000">
     </dubbo:reference>
 </beans>
