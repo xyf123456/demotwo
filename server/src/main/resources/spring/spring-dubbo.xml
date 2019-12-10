@@ -21,7 +21,7 @@
     <!--消费方信息配置-->
     <dubbo:application name="dubboTwo-consume" owner="debug" organization="dubbox"/>
 
-    <!--    引入服务提供方提供的dubbo服务-->
+    <!--    引入服务提供方提供的dubbo服务，dubbo://127.0.0.1:20903,默认的是调用本地的，但是如果服务是放到其他机器上的话，需要加对应的url-->
     <dubbo:reference interface="com.debug.mooc.dubbo.one.api.service.IDubboItemService" id="dubboItemService"
                      url="dubbo://127.0.0.1:20903" protocol="dubbo" version="1.0" timeout="20000">
     </dubbo:reference>
